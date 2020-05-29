@@ -30,25 +30,22 @@ def function(m): #η συνάρτηση μετατρέπει τα html entities 
         return ' '
 
         
-with open('testpage.txt','r',encoding='utf-8') as fp: #άνοιγμα του αρχείου testpage.txt 
-	text = fp.read()
-
-   m = rexp1.search(text)
-   print(m.group(1)) # εκτύποση τών τίτλων 
-
-   text = rexp2.sub(' ',text) #απαλοιφή σχολίων 
-   
-   text = rexp3.sub(' ',text) #απαλοιφή των script/style tags
-
-
-   for m in rexp4.finditer(text): 
-    print('{} {}'.format(m.group(1),m.group(2))) # εκτύποση των links
-
-    text = rexp5_1.sub(' ',text)
-
-    text = rexp5_2.sub(' ',text) # απαλοιφή των tags
+with open('testpage.txt','r',encoding='utf-8') as fp: 
+  text = fp.read()
+  m = rexp1.search(text)
+  print(m.group(1)) 
+  
+  text = rexp2.sub(' ',text) 
+  
+  text = rexp3.sub(' ',text) 
+  
+  for m in rexp4.finditer(text): 
+    print('{} {}'.format(m.group(1),m.group(2)))
     
-    text = rexp6.sub(function,text) # μετατροπή των  html entities
-    text = rexp7.sub(' ',text) # μετατροπή των whitespace
+  text = rexp5_1.sub(' ',text) 
+  text = rexp5_2.sub(' ',text) 
+  text = rexp6.sub(function,text) 
 
-    print(text)
+  text = rexp7.sub(' ',text) 
+
+  print(text)
